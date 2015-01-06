@@ -1,8 +1,11 @@
+#!/usr/bin/python3
 """
-The REPL, or read eval print loop.
+A simple REPL, or read eval print loop.
 """
-from compiler import read
+import sys
+sys.path.append('src/')
 
+from compiler import read
 from compiler.lexer import LexException
 from compiler.parser import ParseException
 

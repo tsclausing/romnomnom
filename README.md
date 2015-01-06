@@ -3,7 +3,7 @@
 A simple compiler/interpreter example using Roman Numerals, following the [Project Euler rules](https://projecteuler.net/about=roman_numerals).
 
 ```
-$ python3 src/repl.py
+$ python3 romnomnom
 > I
 1
 > II
