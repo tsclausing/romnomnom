@@ -3,10 +3,6 @@ The parser accepts a sequence of tokens (from lexer.lex) and returns an abstract
 """
 from collections import namedtuple
 
-
-class ParseException(Exception):
-    pass
-
 Add = namedtuple('Add', 'left right')
 
 

@@ -6,8 +6,7 @@ import sys
 sys.path.append('src/')
 
 from compiler import read
-from compiler.lexer import LexException
-from compiler.parser import ParseException
+from compiler import exceptions
 
 
 if __name__ == "__main__":
@@ -18,7 +17,7 @@ if __name__ == "__main__":
                 # read, eval, print
                 print(eval(read(source)))
                 # loop ...
-        except (LexException, ParseException) as e:
+        except (exceptions.LexException, exceptions.ParseException) as e:
             print(e)
         except KeyboardInterrupt:
             exit(0)
