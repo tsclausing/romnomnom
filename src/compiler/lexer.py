@@ -28,4 +28,4 @@ def pop_token(string, pos=0):
         if string.startswith(pattern):
             return Numeral(pos, pattern), string[len(pattern):], pos+len(pattern)
 
-    raise LexException("Invalid: '%s' at index %d" % (string[0], pos))
+    raise LexException("Lex error: unknown character '%s' at index %d" % (string[0], pos))
