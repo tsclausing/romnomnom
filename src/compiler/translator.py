@@ -9,7 +9,12 @@ from compiler.parser import Add
 
 
 def translate(tree):
-
+    """
+    >>> from compiler.lexer import lex
+    >>> from compiler.parser import parse
+    >>> eval(translate(parse(lex("XLII"))))
+    42
+    """
     return compile(
         source=ast.Expression(body=generate(tree)),
         filename="Romnomnom",

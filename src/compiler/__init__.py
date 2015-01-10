@@ -9,4 +9,8 @@ from compiler.translator import translate
 
 
 def read(source: str):
+    """
+    >>> eval(read("XLII"))
+    42
+    """
     return translate(parse(lex(source)))
