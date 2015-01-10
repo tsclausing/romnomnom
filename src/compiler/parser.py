@@ -9,6 +9,11 @@ Add = namedtuple('Add', 'left right')
 
 
 def parse(tokens):
+    """
+    >>> from compiler.lexer import lex
+    >>> parse(lex("XLII"))
+    Add(left=Numeral(pos=0, value='XL'), right=Add(left=Numeral(pos=2, value='I'), right=Numeral(pos=3, value='I')))
+    """
     tokens = enforce_descending_order(tokens)
     tokens = enforce_no_repeated_pairs(tokens)
     tokens = enforce_frequency(tokens)
@@ -18,11 +23,6 @@ def parse(tokens):
 
 
 def ast(tokens):
-    """
-    >>> from compiler.lexer import lex
-    >>> ast(lex("XLII"))
-    Add(left=Numeral(pos=0, value='XL'), right=Add(left=Numeral(pos=2, value='I'), right=Numeral(pos=3, value='I')))
-    """
     token, *tokens = tokens
     return Add(token, ast(tokens)) if tokens else token
 
