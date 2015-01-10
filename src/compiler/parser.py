@@ -30,25 +30,26 @@ def ast(tokens):
 def enforce_descending_order(tokens):
     # Numerals must be arranged in descending order.
     descending_order = ("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
-    i = 0  # -----------^^^
+    previous = 0  # ----^^^
 
     for token in tokens:
-        token_i = descending_order.index(token.value)
-        if token_i < i:
+        index = descending_order.index(token.value)
+        if index < previous:
             raise ParseException("Parse error: value %s not in descending order at index %d" % (token.value, token.pos))
-        i = token_i
+        previous = index
         yield token
 
 
 def enforce_no_repeated_pairs(tokens):
     # Subtractive pairs may not repeat.
-    previous_pair = None
+    subtractive_pairs = ("IV", "IX", "XL", "XC", "CD", "CM")
+    value = None
 
     for token in tokens:
-        if len(token.value) == 2:
-            if token.value == previous_pair:
+        if token.value in subtractive_pairs:
+            if token.value == value:
                 raise ParseException("Parse error: repeated subtractive pair %s at index %d" % (token.value, token.pos))
-            previous_pair = token.value
+            value = token.value
         yield token
 
 
@@ -61,11 +62,11 @@ def enforce_frequency(tokens):
     }
 
     for token in tokens:
-        for value in countdown:
-            if token.value in value:
-                if countdown[value] == 0:
-                    raise ParseException("Parse error: frequency limit of %r exceeded at index %d" % (value, token.pos))
-                countdown[value] -= 1
+        for values in countdown:
+            if token.value in values:
+                if countdown[values] == 0:
+                    raise ParseException("Parse error: frequency limit of %r exceeded at index %d" % (values, token.pos))
+                countdown[values] -= 1
         yield token
 
 
