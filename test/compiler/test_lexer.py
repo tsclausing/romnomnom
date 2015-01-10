@@ -5,24 +5,24 @@ from compiler import lexer
 
 class TestLexerLex(unittest.TestCase):
     """
-    Test that lexer.lex(string) returns an iterable of Numeral tuples with the correct position and value.
+    Test that lexer.lex(string) returns an iterable of Num tuples with the correct position and value.
     """
 
     def test_valid_tokens(self):
         for value in ("IV", "IX", "XL", "XC", "CD", "CM", "I", "V", "X", "L", "C", "D", "M"):
             self.assertEqual(
                 list(lexer.lex(value)),
-                [lexer.Numeral(0, value)]
+                [lexer.Num(0, value)]
             )
 
     def test_valid_string(self):
         self.assertEqual(
             list(lexer.lex("MDCLXVI")),
-            [lexer.Numeral(0, "M"), lexer.Numeral(1, "D"), lexer.Numeral(2, "C"), lexer.Numeral(3, "L"), lexer.Numeral(4, "X"), lexer.Numeral(5, "V"), lexer.Numeral(6, "I")]
+            [lexer.Num(0, "M"), lexer.Num(1, "D"), lexer.Num(2, "C"), lexer.Num(3, "L"), lexer.Num(4, "X"), lexer.Num(5, "V"), lexer.Num(6, "I")]
         )
         self.assertEqual(
             list(lexer.lex("IVIXXLXCCDCM")),
-            [lexer.Numeral(0, "IV"), lexer.Numeral(2, "IX"), lexer.Numeral(4, "XL"), lexer.Numeral(6, "XC"), lexer.Numeral(8, "CD"), lexer.Numeral(10, "CM")]
+            [lexer.Num(0, "IV"), lexer.Num(2, "IX"), lexer.Num(4, "XL"), lexer.Num(6, "XC"), lexer.Num(8, "CD"), lexer.Num(10, "CM")]
         )
 
     def test_invalid_token(self):

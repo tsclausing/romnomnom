@@ -5,13 +5,13 @@ from collections import namedtuple
 
 from compiler.exceptions import LexException
 
-Numeral = namedtuple('Numeral', 'pos value')
+Num = namedtuple('Num', 'pos value')
 
 
-def lex(source) -> [Numeral]:
+def lex(source) -> [Num]:
     """
     >>> list(lex("XLII"))
-    [Numeral(pos=0, value='XL'), Numeral(pos=2, value='I'), Numeral(pos=3, value='I')]
+    [Num(pos=0, value='XL'), Num(pos=2, value='I'), Num(pos=3, value='I')]
     """
     values = ("IV", "IX", "XL", "XC", "CD", "CM", "I", "V", "X", "L", "C", "D", "M")
 
@@ -19,7 +19,7 @@ def lex(source) -> [Numeral]:
     while pos < len(source):
         value = next((value for value in values if source.startswith(value, pos)), None)
         if value:
-            yield Numeral(pos, value)
+            yield Num(pos, value)
             pos += len(value)
         else:
             raise LexException("Lex error: unknown character '%s' at index %d" % (source[pos], pos))

@@ -4,8 +4,9 @@ Translates a parsed Romnomnom AST into a Python executable code object.
 import ast
 from functools import singledispatch
 
-from compiler.lexer import Numeral
+from compiler.parser import RomanNumeral
 from compiler.parser import Add
+from compiler.lexer import Num
 
 
 def translate(tree):
@@ -30,6 +31,11 @@ def generate(node):
     raise NotImplementedError('Python AST Generation Error: generate(%r)' % node)
 
 
+@generate.register(RomanNumeral)
+def _(node):
+    return generate(node.expression)
+
+
 @generate.register(Add)
 def _(node):
     return ast.BinOp(
@@ -41,7 +47,7 @@ def _(node):
     )
 
 
-@generate.register(Numeral)
+@generate.register(Num)
 def _(node):
     values = {
         "M": 1000,

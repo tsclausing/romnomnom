@@ -1,10 +1,11 @@
 """
-The parser accepts a sequence of tokens (from lexer.lex) and returns an abstract syntax tree.
+The parser accepts a sequence of tokens (from lexer.lex) and returns a RomanNumeral abstract syntax tree.
 """
 from collections import namedtuple
 
 from compiler.exceptions import ParseException
 
+RomanNumeral = namedtuple('RomanNumeral', 'expression')
 Add = namedtuple('Add', 'left right')
 
 
@@ -12,14 +13,14 @@ def parse(tokens):
     """
     >>> from compiler.lexer import lex
     >>> parse(lex("XLII"))
-    Add(left=Numeral(pos=0, value='XL'), right=Add(left=Numeral(pos=2, value='I'), right=Numeral(pos=3, value='I')))
+    RomanNumeral(expression=Add(left=Num(pos=0, value='XL'), right=Add(left=Num(pos=2, value='I'), right=Num(pos=3, value='I'))))
     """
     tokens = enforce_descending_order(tokens)
     tokens = enforce_no_repeated_pairs(tokens)
     tokens = enforce_frequency(tokens)
     tree = ast(tokens)
     tree = enforce_denomination(tree)
-    return tree
+    return RomanNumeral(tree)
 
 
 def ast(tokens):
