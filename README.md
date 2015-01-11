@@ -40,7 +40,7 @@ Python bytecode.
 The three common patterns found in compilers that we'll explore in Romnomnom are 
 [lexing](http://en.wikipedia.org/wiki/Lexical_analysis), 
 [parsing](http://en.wikipedia.org/wiki/Parsing), 
-and [code generation](http://en.wikipedia.org/wiki/Code_generation_%29compiler%29). These three patterns make up the 
+and [code generation](http://en.wikipedia.org/wiki/Code_generation_%28compiler%29). These three patterns make up the 
 three "phases" of the compiler and can be seen composed together plainly in `src/romnomnom/compiler.py`:
 
 ```python
@@ -63,17 +63,36 @@ $ python3 romnomnom
 
 ### 1. lex(source) -> tokens
 
-Open `src/romnomnom/lexer.py`
+Code: [src/romnomnom/lexer.py](https://github.com/tsclausing/romnomnom/blob/master/src/romnomnom/lexer.py)
+
+Related terminology: 
+Lexing, 
+[Lexical Analysis](http://en.wikipedia.org/wiki/Lexical_analysis), 
+Scanning, 
+[Tokenization](http://en.wikipedia.org/wiki/Tokenization_%28lexical_analysis%29)
 
 ### 2. parse(tokens) -> ilr
 
-Open `src/romnomnom/parser.py`
+Code: [src/romnomnom/parser.py](https://github.com/tsclausing/romnomnom/blob/master/src/romnomnom/parser.py)
+
+Related terminology:
+[Parsing](http://en.wikipedia.org/wiki/Parsing),
+Syntactic Analysis, 
+[Semantic Analysis](http://en.wikipedia.org/w/index.php?title=Semantic_analysis_%28compilers%29&redirect=no)
 
 ### 3. generate(ilr) -> target
 
-Open `src/romnomnom/generator.py`
+Code: [src/romnomnom/generator.py](https://github.com/tsclausing/romnomnom/blob/master/src/romnomnom/generator.py)
+
+Related terminology:
+[Code Generation](http://en.wikipedia.org/wiki/Code_generation_%28compiler%29), 
+[Intermediate Representation](http://en.wikipedia.org/wiki/Intermediate_language#Intermediate_representation)
 
 
-## The REPL
+## The Romnomnom REPL
 
-Open `./romnomnom`
+Code: [./romnomnom](https://github.com/tsclausing/romnomnom/blob/master/romnomnom)
+
+Related terminology: 
+[Read Eval Print Loop](http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop),
+[Interpreter](http://en.wikipedia.org/wiki/Interpreter_%28computing%29)
