@@ -1,6 +1,6 @@
 import unittest
 
-from compiler import lexer
+from romnomnom import lexer
 
 
 class TestLexerLex(unittest.TestCase):

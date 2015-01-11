@@ -4,15 +4,15 @@ Translates a parsed Romnomnom AST into a Python executable code object.
 import ast
 from functools import singledispatch
 
-from compiler.parser import RomanNumeral
-from compiler.parser import Add
-from compiler.lexer import Num
+from romnomnom.parser import RomanNumeral
+from romnomnom.parser import Add
+from romnomnom.lexer import Num
 
 
 def translate(tree):
     """
-    >>> from compiler.lexer import lex
-    >>> from compiler.parser import parse
+    >>> from romnomnom.lexer import lex
+    >>> from romnomnom.parser import parse
     >>> eval(translate(parse(lex("XLII"))))
     42
     """

@@ -3,7 +3,7 @@ The lexer accepts a string of characters (source code) and returns a sequence of
 """
 from collections import namedtuple
 
-from compiler.exceptions import LexException
+from romnomnom.exceptions import LexException
 
 Num = namedtuple('Num', 'pos value')
 

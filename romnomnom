@@ -5,8 +5,8 @@ A simple REPL, or read eval print loop.
 import sys
 sys.path.append('src/')
 
-from compiler import read
-from compiler import exceptions
+from romnomnom import exceptions
+from romnomnom.compiler import compile as read
 
 
 if __name__ == "__main__":

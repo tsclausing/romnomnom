@@ -3,7 +3,7 @@ The parser accepts a sequence of tokens (from lexer.lex) and returns a RomanNume
 """
 from collections import namedtuple
 
-from compiler.exceptions import ParseException
+from romnomnom.exceptions import ParseException
 
 RomanNumeral = namedtuple('RomanNumeral', 'expression')
 Add = namedtuple('Add', 'left right')
@@ -11,7 +11,7 @@ Add = namedtuple('Add', 'left right')
 
 def parse(tokens):
     """
-    >>> from compiler.lexer import lex
+    >>> from romnomnom.lexer import lex
     >>> parse(lex("XLII"))
     RomanNumeral(expression=Add(left=Num(pos=0, value='XL'), right=Add(left=Num(pos=2, value='I'), right=Num(pos=3, value='I'))))
     """
