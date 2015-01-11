@@ -6,17 +6,17 @@ import sys
 sys.path.append("src/")
 
 from romnomnom import exceptions
-from romnomnom.compiler import compile as read
+from romnomnom.interpreter import evaluate
+
+read = input
 
 
 if __name__ == "__main__":
     while True:
         try:
-            source = input("> ").strip()
-            if source:
-                # read, eval, print
-                print(eval(read(source)))
-                # loop ...
+            # read, eval, print
+            print(evaluate(read("> ")))
+            # loop ...
         except (exceptions.LexException, exceptions.ParseException) as e:
             print(e)
         except KeyboardInterrupt:
