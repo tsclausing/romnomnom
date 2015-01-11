@@ -1,7 +1,8 @@
 """
 The compiler composes each phase into a single compile() function to translate the source code into the target language.
 
-Translate: http://en.wikipedia.org/wiki/Translator_(computing)
+Translator: http://en.wikipedia.org/wiki/Translator_(computing)
+Compiler: http://en.wikipedia.org/wiki/Compiler
 """
 from romnomnom.lexer import lex
 from romnomnom.parser import parse

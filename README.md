@@ -63,7 +63,7 @@ $ python3 romnomnom
 > 
 ```
 
-![repl](https://cloud.githubusercontent.com/assets/542163/5696779/df6b1e7a-99a1-11e4-9b61-090e77eef1ab.png)
+![repl](https://cloud.githubusercontent.com/assets/542163/5696807/d0607fb4-99a2-11e4-973d-64ed23b295b5.png)
 
 ### 1. lex(source) -> tokens
 

@@ -1,7 +1,7 @@
 """
 Translates a parsed Romnomnom AST into a Python executable code object.
 
-- Code Generation: http://en.wikipedia.org/wiki/Code_generation_(compiler)
+Code Generation: http://en.wikipedia.org/wiki/Code_generation_(compiler)
 """
 import ast
 from functools import singledispatch
