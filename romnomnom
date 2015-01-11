@@ -3,7 +3,7 @@
 A simple REPL, or read eval print loop.
 """
 import sys
-sys.path.append('src/')
+sys.path.append("src/")
 
 from romnomnom import exceptions
 from romnomnom.compiler import compile as read
@@ -12,7 +12,7 @@ from romnomnom.compiler import compile as read
 if __name__ == "__main__":
     while True:
         try:
-            source = input('> ').strip()
+            source = input("> ").strip()
             if source:
                 # read, eval, print
                 print(eval(read(source)))

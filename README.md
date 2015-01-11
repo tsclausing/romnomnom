@@ -53,13 +53,17 @@ Looking a little bit closer at each of the phases, here's how a simple compiler 
 
 ![compiler](https://cloud.githubusercontent.com/assets/542163/5695988/2b86ee9a-9981-11e4-8609-c86f853c012b.png)
 
-This is actually _exactly_ how Romnomnom works. Let's work through the diagram above using the following REPL example:
+This is actually _exactly_ how Romnomnom works. Let's work through the diagram above in detail using the following 
+Romnomnom REPL session as an example:
 
 ```bash
 $ python3 romnomnom
 > XLII
 42
+> 
 ```
+
+![repl](https://cloud.githubusercontent.com/assets/542163/5696721/58541a6a-999f-11e4-9be4-5fd1b93ba179.png)
 
 ### 1. lex(source) -> tokens
 
