@@ -1,5 +1,7 @@
 """
 The lexer accepts a string of characters (source code) and returns a sequence of tokens, in this case only Numerals.
+
+Lexical Analysis: http://en.wikipedia.org/wiki/Lexical_analysis
 """
 from collections import namedtuple
 

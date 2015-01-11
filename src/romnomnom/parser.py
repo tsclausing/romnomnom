@@ -1,5 +1,7 @@
 """
 The parser accepts a sequence of tokens (from lexer.lex) and returns a RomanNumeral abstract syntax tree.
+
+Parsing: http://en.wikipedia.org/wiki/Parsing
 """
 from collections import namedtuple
 

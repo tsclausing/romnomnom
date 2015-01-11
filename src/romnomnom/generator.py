@@ -1,5 +1,7 @@
 """
 Translates a parsed Romnomnom AST into a Python executable code object.
+
+- Code Generation: http://en.wikipedia.org/wiki/Code_generation_(compiler)
 """
 import ast
 from functools import singledispatch
@@ -9,45 +11,45 @@ from romnomnom.parser import Add
 from romnomnom.lexer import Num
 
 
-def translate(tree):
+def generate(tree):
     """
     >>> from romnomnom.lexer import lex
     >>> from romnomnom.parser import parse
-    >>> eval(translate(parse(lex("XLII"))))
+    >>> eval(generate(parse(lex("XLII"))))
     42
     """
     return compile(
-        source=ast.Expression(body=generate(tree)),
+        source=ast.Expression(body=translate(tree)),
         filename="Romnomnom",
         mode="eval",
     )
 
 
 @singledispatch
-def generate(node):
+def translate(node):
     """
     Recursively transform a Romnomnom AST node into a Python AST node.
     """
     raise NotImplementedError('Python AST Generation Error: generate(%r)' % node)
 
 
-@generate.register(RomanNumeral)
+@translate.register(RomanNumeral)
 def _(node):
-    return generate(node.expression)
+    return translate(node.expression)
 
 
-@generate.register(Add)
+@translate.register(Add)
 def _(node):
     return ast.BinOp(
         lineno=1,
         col_offset=node.left.pos,
-        left=generate(node.left),
+        left=translate(node.left),
         op=ast.Add(),
-        right=generate(node.right),
+        right=translate(node.right),
     )
 
 
-@generate.register(Num)
+@translate.register(Num)
 def _(node):
     values = {
         "M": 1000,
