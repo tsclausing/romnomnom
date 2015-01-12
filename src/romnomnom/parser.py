@@ -3,9 +3,11 @@ The parser accepts a sequence of tokens (from lexer.lex) and returns a RomanNume
 
 Parsing: http://en.wikipedia.org/wiki/Parsing
 """
+import sys
 from collections import namedtuple
 
 from romnomnom.exceptions import ParseException
+from romnomnom.lexer import Num
 
 RomanNumeral = namedtuple('RomanNumeral', 'expression')
 Add = namedtuple('Add', 'left right')
@@ -31,7 +33,7 @@ def ast(tokens):
 
 
 def enforce_descending_order(tokens):
-    # Numerals must be arranged in descending order.
+    # Rule: Numerals must be arranged in descending order.
     descending_order = ("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
     previous = 0  # ----^^^
 
@@ -44,7 +46,7 @@ def enforce_descending_order(tokens):
 
 
 def enforce_no_repeated_pairs(tokens):
-    # Subtractive pairs may not repeat.
+    # Rule: Subtractive pairs may not repeat.
     subtractive_pairs = ("IV", "IX", "XL", "XC", "CD", "CM")
     value = None
 
@@ -57,7 +59,7 @@ def enforce_no_repeated_pairs(tokens):
 
 
 def enforce_frequency(tokens):
-    # D, L, and V may each only appear once.
+    # Rule: D, L, and V may each only appear once.
     countdown = {
         ("D", "CD"): 1,
         ("L", "XL"): 1,
@@ -74,5 +76,23 @@ def enforce_frequency(tokens):
 
 
 def enforce_denomination(tree):
-    # TODO: M, C, and X man not be equalled or exceeded by smaller denominations.
+    # Rule: M, C, and X may not be equalled or exceeded by smaller denominations.
+    values = {"M": 1000, "CM": 900, "D": 500, "CD": 400, "C": 100, "XC": 90, "L": 50, "XL": 40, "X": 10, "IX": 9, "V": 5, "IV": 4, "I": 1}
+    denominations = [("X", 10), ("C", 100), ("M", 1000), ("_", sys.maxsize)]
+
+    def num(node):
+        return values[node.value] if isinstance(node, Num) else add(node)
+
+    def add(node):
+        left, right = num(node.left), num(node.right) if isinstance(node.right, Num) else add(node.right)
+        total, denomination = left + right, denominations[0][1]
+        if total >= denomination:
+            if left >= denomination:
+                while denominations and denominations[0][1] <= total:
+                    del denominations[0]
+            elif left < denomination:
+                raise ParseException('Parse error: smaller denominations exceed %s at index %d' % (denominations[0][0], node.left.pos))
+        return total
+
+    num(tree)
     return tree
