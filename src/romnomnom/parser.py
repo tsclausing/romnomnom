@@ -3,11 +3,9 @@ The parser accepts a sequence of tokens (from lexer.lex) and returns a RomanNume
 
 Parsing: http://en.wikipedia.org/wiki/Parsing
 """
-import sys
 from collections import namedtuple
 
 from romnomnom.exceptions import ParseException
-from romnomnom.lexer import Num
 
 RomanNumeral = namedtuple('RomanNumeral', 'expression')
 Add = namedtuple('Add', 'left right')
@@ -78,21 +76,23 @@ def enforce_frequency(tokens):
 def enforce_denomination(tree):
     # Rule: M, C, and X may not be equalled or exceeded by smaller denominations.
     values = {"M": 1000, "CM": 900, "D": 500, "CD": 400, "C": 100, "XC": 90, "L": 50, "XL": 40, "X": 10, "IX": 9, "V": 5, "IV": 4, "I": 1}
-    denominations = [("X", 10), ("C", 100), ("M", 1000), ("_", sys.maxsize)]
+    levels = [10, 100, 1000]
 
-    def num(node):
-        return values[node.value] if isinstance(node, Num) else add(node)
+    def flatten(node):
+        nums = []
+        while isinstance(node, Add):
+            nums.append(node.left)
+            node = node.right
+        nums.append(node)
+        return nums
 
-    def add(node):
-        left, right = num(node.left), num(node.right) if isinstance(node.right, Num) else add(node.right)
-        total, denomination = left + right, denominations[0][1]
-        if total >= denomination:
-            if left >= denomination:
-                while denominations and denominations[0][1] <= total:
-                    del denominations[0]
-            elif left < denomination:
-                raise ParseException('Parse error: smaller denominations exceed %s at index %d' % (denominations[0][0], node.left.pos))
-        return total
+    total = 0
+    for num in reversed(flatten(tree)):
+        value = values[num.value]
+        while levels and value >= levels[0]:
+            del levels[0]
+        total += value
+        if levels and total >= levels[0]:
+            raise ParseException("Parse error: smaller denominations exceed %s at index %d" % (next(k for k in values if values[k] == levels[0]), num.pos))
 
-    num(tree)
     return tree

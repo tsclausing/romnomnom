@@ -18,12 +18,16 @@ class TestParserParse(unittest.TestCase):
 
     def test_valid_tokens(self):
         self.assertEqual(
-            parser.parse(lexer.lex("MDCLXVI")),
+            parser.parse(lexer.lex("MDCLXVI")),  # 1666
             parser.RomanNumeral(parser.Add(lexer.Num(0, "M"), parser.Add(lexer.Num(1, "D"), parser.Add(lexer.Num(2, "C"), parser.Add(lexer.Num(3, "L"), parser.Add(lexer.Num(4, "X"), parser.Add(lexer.Num(5, "V"), lexer.Num(6, "I"))))))))
         )
         self.assertEqual(
-            parser.parse(lexer.lex("CMCDXCXLIXIV")),
-            parser.RomanNumeral(parser.Add(lexer.Num(0, "CM"), parser.Add(lexer.Num(2, "CD"), parser.Add(lexer.Num(4, "XC"), parser.Add(lexer.Num(6, "XL"), parser.Add(lexer.Num(8, "IX"), lexer.Num(10, "IV")))))))
+            parser.parse(lexer.lex("CMXCIX")),  # 999
+            parser.RomanNumeral(parser.Add(lexer.Num(0, "CM"), parser.Add(lexer.Num(2, "XC"), lexer.Num(4, "IX"))))
+        )
+        self.assertEqual(
+            parser.parse(lexer.lex("CDXLIV")),  # 444
+            parser.RomanNumeral(parser.Add(lexer.Num(0, "CD"), parser.Add(lexer.Num(2, "XL"), lexer.Num(4, "IV"))))
         )
 
     def test_invalid_tokens__descending_order(self):
@@ -38,6 +42,6 @@ class TestParserParse(unittest.TestCase):
         for invalid in ("DD", "DCD", "LL", "LXL", "VV", "VIV"):
             self.assertRaises(parser.ParseException, lambda: list(parser.enforce_frequency(lexer.lex(invalid))))
 
-    @unittest.skip("parser.enforce_denomination() not yet implemented")
     def test_invalid_tree__denomination(self):
-        parser.enforce_denomination(...)
+        for invalid in ("IXI", "XCX", "CMC", "VIIIII", "IIIIIIIIII", "DCCCCC", "CCCCCCCCCC"):
+            self.assertRaises(parser.ParseException, lambda: list(parser.enforce_denomination(parser.ast(lexer.lex(invalid)))))
