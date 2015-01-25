@@ -17,7 +17,7 @@ if __name__ == "__main__":
             # read, eval, print
             print(evaluate(read("> ")))
             # loop ...
-        except (exceptions.LexException, exceptions.ParseException) as e:
+        except (exceptions.SyntaxException, exceptions.ParseException) as e:
             print(e)
         except KeyboardInterrupt:
             exit(0)

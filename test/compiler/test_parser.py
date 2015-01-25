@@ -30,18 +30,6 @@ class TestParserParse(unittest.TestCase):
             parser.RomanNumeral(parser.Add(lexer.Num(0, "CD"), parser.Add(lexer.Num(2, "XL"), lexer.Num(4, "IV"))))
         )
 
-    def test_invalid_tokens__descending_order(self):
-        for invalid in ("IM", "IIV"):
-            self.assertRaises(parser.ParseException, lambda: list(parser.enforce_descending_order(lexer.lex(invalid))))
-
-    def test_invalid_tokens__no_repeated_pairs(self):
-        for invalid in ("IVIV", "IXIX", "XLXL", "XCXC", "CDCD", "CMCM"):
-            self.assertRaises(parser.ParseException, lambda: list(parser.enforce_no_repeated_pairs(lexer.lex(invalid))))
-
-    def test_invalid_tokens__frequency(self):
-        for invalid in ("DD", "DCD", "LL", "LXL", "VV", "VIV"):
-            self.assertRaises(parser.ParseException, lambda: list(parser.enforce_frequency(lexer.lex(invalid))))
-
     def test_invalid_tree__denomination(self):
         for invalid in ("IXI", "XCX", "CMC", "VIIIII", "IIIIIIIIII", "DCCCCC", "CCCCCCCCCC"):
             self.assertRaises(parser.ParseException, lambda: list(parser.enforce_denomination(parser.ast(lexer.lex(invalid)))))

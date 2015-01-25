@@ -21,10 +21,22 @@ class TestLexerLex(unittest.TestCase):
             [lexer.Num(0, "M"), lexer.Num(1, "D"), lexer.Num(2, "C"), lexer.Num(3, "L"), lexer.Num(4, "X"), lexer.Num(5, "V"), lexer.Num(6, "I")]
         )
         self.assertEqual(
-            list(lexer.lex("IVIXXLXCCDCM")),
-            [lexer.Num(0, "IV"), lexer.Num(2, "IX"), lexer.Num(4, "XL"), lexer.Num(6, "XC"), lexer.Num(8, "CD"), lexer.Num(10, "CM")]
+            list(lexer.lex("CMCDXCXLIXIV")),
+            [lexer.Num(0, "CM"), lexer.Num(2, "CD"), lexer.Num(4, "XC"), lexer.Num(6, "XL"), lexer.Num(8, "IX"), lexer.Num(10, "IV")]
         )
 
-    def test_invalid_strings(self):
+    def test_invalid_tokens__tokenize(self):
         for invalid in ("M.DCCC.XLIX", "HAI", "!"):
-            self.assertRaises(lexer.LexException, lambda: list(lexer.lex(invalid)))
+            self.assertRaises(lexer.SyntaxException, lambda: list(lexer.tokenize(invalid)))
+
+    def test_invalid_tokens__descending_order(self):
+        for invalid in ("IM", "IIV"):
+            self.assertRaises(lexer.SyntaxException, lambda: list(lexer.enforce_descending_order(lexer.tokenize(invalid))))
+
+    def test_invalid_tokens__no_repeated_pairs(self):
+        for invalid in ("IVIV", "IXIX", "XLXL", "XCXC", "CDCD", "CMCM"):
+            self.assertRaises(lexer.SyntaxException, lambda: list(lexer.enforce_no_repeated_pairs(lexer.tokenize(invalid))))
+
+    def test_invalid_tokens__frequency(self):
+        for invalid in ("DD", "DCD", "LL", "LXL", "VV", "VIV"):
+            self.assertRaises(lexer.SyntaxException, lambda: list(lexer.enforce_frequency(lexer.tokenize(invalid))))

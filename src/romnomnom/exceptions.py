@@ -1,9 +1,9 @@
 """
-Exceptions for the compiler phases.
+Exceptions for the compiler.
 """
 
 
-class LexException(Exception):
+class SyntaxException(Exception):
     pass
 
 
