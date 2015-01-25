@@ -53,8 +53,19 @@ Looking a little bit closer at each of the phases, here's how a simple compiler 
 
 ![compiler](https://cloud.githubusercontent.com/assets/542163/5695988/2b86ee9a-9981-11e4-8609-c86f853c012b.png)
 
-This is actually _exactly_ how Romnomnom works. Let's work through the diagram above in detail using the following 
-Romnomnom REPL session as an example:
+This is actually _exactly_ how Romnomnom works (and, basically, how Python works). 
+
+> There are two general approaches to programming language implementation:
+> 
+> * Interpretation: An interpreter takes as input a program in some language, and performs the actions written in that 
+> language on some machine.
+> * Compilation: A compiler takes as input a program in some language, and translates that program into some other 
+> language, which may serve as input to another interpreter or another compiler.
+> 
+> Notice that a compiler does not directly execute the program. Ultimately, in order to execute a program via 
+> compilation, it must be translated into a form that can serve as input to an interpreter. - [wikipedia.org/Programming_language_implementation](http://en.wikipedia.org/wiki/Programming_language_implementation)
+
+Perfect! Let's work through the diagram above in detail using the following Romnomnom REPL session as an example:
 
 ```bash
 $ python3 romnomnom
