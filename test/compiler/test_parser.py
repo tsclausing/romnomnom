@@ -2,6 +2,7 @@ import unittest
 
 from romnomnom import lexer
 from romnomnom import parser
+from romnomnom import exceptions
 
 
 class TestParserParse(unittest.TestCase):
@@ -32,4 +33,4 @@ class TestParserParse(unittest.TestCase):
 
     def test_invalid_tree__denomination(self):
         for invalid in ("IXI", "XCX", "CMC", "VIIIII", "IIIIIIIIII", "DCCCCC", "CCCCCCCCCC"):
-            self.assertRaises(parser.ParseException, lambda: list(parser.enforce_denomination(parser.ast(lexer.lex(invalid)))))
+            self.assertRaises(exceptions.SyntaxException, lambda: list(parser.enforce_denomination(parser.ast(lexer.lex(invalid)))))

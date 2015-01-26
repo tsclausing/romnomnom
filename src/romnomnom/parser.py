@@ -5,7 +5,7 @@ Parsing: http://en.wikipedia.org/wiki/Parsing
 """
 from collections import namedtuple
 
-from romnomnom.exceptions import ParseException
+from romnomnom.exceptions import SyntaxException
 
 RomanNumeral = namedtuple('RomanNumeral', 'expression')
 Add = namedtuple('Add', 'left right')
@@ -25,7 +25,6 @@ def parse(tokens):
 def ast(tokens):
     token, *tokens = tokens
     return Add(token, ast(tokens)) if tokens else token
-
 
 
 def enforce_denomination(tree):
@@ -48,6 +47,6 @@ def enforce_denomination(tree):
             del levels[0]
         total += value
         if levels and total >= levels[0]:
-            raise ParseException("Parse error: smaller denominations exceed %s at index %d" % (next(k for k in values if values[k] == levels[0]), num.pos))
+            raise SyntaxException("Smaller denominations exceed %s at index %d" % (next(k for k in values if values[k] == levels[0]), num.pos))
 
     return tree
