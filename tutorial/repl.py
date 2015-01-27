@@ -17,7 +17,7 @@ def repl():
     Runs a Roman Numeral Read-Eval-Print-Loop.
     """
     while True:
-        print(evaluate(input("Roman Numeral: ")))
+        print(evaluate(input("tutorial> ")))
 
 
 def evaluate(source):

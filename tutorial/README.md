@@ -4,14 +4,14 @@ We begin with `repl.py` ... a _barely_ functioning Roman Numeral toy language im
 
 ```
 $ python3 tutorial/repl.py
-Roman Numeral: I
+tutorial> I
 1
-Roman Numeral: IIIII
+tutorial> IIIII
 5
-Roman Numeral: IIIIIIIII
+tutorial> IIIIIIIII
 9
-Roman Numeral: 
+tutorial>
 ```
 
 This tutorial will guide and hint you towards a rich, full-featured Roman Numeral toy language implementation like the
-one found in the `src/` directory.
+one found in the project `/src/` directory.
