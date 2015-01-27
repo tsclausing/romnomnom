@@ -30,7 +30,7 @@ def translate(node):
     """
     Recursively transform a Romnomnom AST node into a Python AST node.
     """
-    raise NotImplementedError('Python AST Generation Error: generate(%r)' % node)
+    raise NotImplementedError('Python AST Generation Error: translate(%r)' % node)
 
 
 @translate.register(RomanNumeral)
