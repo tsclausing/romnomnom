@@ -1,11 +1,10 @@
 """
-Romnomnom Tutorial!
+The Romnomnom Tutorial!
 
 See the README.md file for instructions.
 """
 from functools import singledispatch
 from collections import namedtuple
-
 import ast
 
 
@@ -44,7 +43,6 @@ def lex(string) -> "tokens":
     Lex the string and output a generator of tokens for `parse()`.
     """
     values = ("I", ...)
-
     for value in string:
         if value in values:
             yield Numeral(value)
@@ -81,29 +79,18 @@ def translate(node):
 
 @translate.register(Add)
 def _(node):
-    return ast.BinOp(
-        left=translate(node.left),
-        op=ast.Add(),
-        right=translate(node.right)
-    )
+    return ast.BinOp(left=translate(node.left), op=ast.Add(), right=translate(node.right))
 
 
 @translate.register(Numeral)
 def _(node):
     values = {"I": 1, ...: ...}
-    return ast.Num(
-        n=values[node.value]
-    )
+    return ast.Num(n=values[node.value])
 
 
 #
-# This module may be run as a Python 3 script.
+# This module may be run as a Python 3 script to start a REPL.
 #
 
 if __name__ == "__main__":
-    """
-    Run this module with
-
-    $ python3 repl.py
-    """
     repl()

@@ -21,13 +21,20 @@ $ python3 romnomnom
 5
 ```
 
-## RTFS? TL;DR. ¯&#92;&#95;(ツ)&#95;/¯ 
+## Prefer to Work Through a Tutorial?
+
+The Romnomnom project includes a [self-guided tutorial](https://github.com/tsclausing/romnomnom/tree/master/tutorial).
+The tutorial provides the starting point for a Romnomnom implementation in a single [file](https://github.com/tsclausing/romnomnom/blob/master/tutorial/repl.py)
+and encourages the reader to implement the full scope of Roman Numeral [rules](https://projecteuler.net/about=roman_numerals) 
+that Romnomnom supports.
+
+## Prefer to Read the Source? TL;DR. ¯&#92;&#95;(ツ)&#95;/¯ 
 
 Romnomnom weighs in around 250 lines of code. Hopefully it's a nice, easy read. And maybe even easier after scrolling
 through this README. The diagrams below explain what's happening in the code and provide plenty of context which will
 be helpful before working through the [pypethon](https://github.com/tsclausing/pypethon) tutorial.
 
-## The Romnomnom Compiler
+# The Romnomnom Compiler
 
 > A compiler is a computer program (or set of programs) that transforms source code written in a programming language 
 (the source language) into another computer language (the target language). - [wikipedia.org/Compiler](http://en.wikipedia.org/wiki/Compiler)
@@ -76,7 +83,7 @@ $ python3 romnomnom
 
 ![repl](https://cloud.githubusercontent.com/assets/542163/5734994/645a0ad6-9b84-11e4-9747-b2f367a35dfc.png)
 
-### 1. lex(source) -> tokens
+## 1. lex(source) -> tokens
 
 Code: [src/romnomnom/lexer.py](https://github.com/tsclausing/romnomnom/blob/master/src/romnomnom/lexer.py)
 
@@ -86,7 +93,7 @@ Lexing,
 Scanning, 
 [Tokenization](http://en.wikipedia.org/wiki/Tokenization_%28lexical_analysis%29)
 
-### 2. parse(tokens) -> ilr
+## 2. parse(tokens) -> ilr
 
 Code: [src/romnomnom/parser.py](https://github.com/tsclausing/romnomnom/blob/master/src/romnomnom/parser.py)
 
@@ -95,7 +102,7 @@ Related terminology:
 Syntactic Analysis, 
 [Semantic Analysis](http://en.wikipedia.org/w/index.php?title=Semantic_analysis_%28compilers%29&redirect=no)
 
-### 3. generate(ilr) -> target
+## 3. generate(ilr) -> target
 
 Code: [src/romnomnom/generator.py](https://github.com/tsclausing/romnomnom/blob/master/src/romnomnom/generator.py)
 
@@ -104,7 +111,7 @@ Related terminology:
 [Intermediate Representation](http://en.wikipedia.org/wiki/Intermediate_language#Intermediate_representation)
 
 
-## The Romnomnom REPL
+# The Romnomnom REPL
 
 Code: [./romnomnom](https://github.com/tsclausing/romnomnom/blob/master/romnomnom)
 
