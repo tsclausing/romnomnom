@@ -27,3 +27,7 @@ Implement:
 
 Feel free to refer to the `/src/` implementation for hints along the way, and compare results from running the tutorial
 REPL to results with the same input from the reference implementation.
+
+## No "right" in Compilers
+
+There's no "right" solution to any of the goals, so experiment at will! There are only "correct" or "incorrect" results.
