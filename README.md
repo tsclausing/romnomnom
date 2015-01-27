@@ -1,6 +1,6 @@
 # Romnomnom
 
-A simple compiler/interpreter example using Roman Numerals following the Project Euler 
+A simple REPL-Compiler-Interpreter example using Roman Numerals following the Project Euler 
 [rules](https://projecteuler.net/about=roman_numerals).
 
 This repo is supplemental material for project [pypethon](https://github.com/tsclausing/pypethon) with the goal of 
