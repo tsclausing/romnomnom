@@ -3,7 +3,7 @@
 We begin with `/tutorial/repl.py` ... a _barely_ functioning Roman Numeral toy language implementation.
 
 ```
-$ python3 tutorial/repl.py
+$ python3 -m tutorial.repl
 tutorial> I
 1
 tutorial> IIIII
